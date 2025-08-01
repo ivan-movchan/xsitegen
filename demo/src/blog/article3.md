@@ -1,7 +1,5 @@
 Article 3 | {name}
 
-#### [Home](../index.html) &bull; [About me](../me/index.html)
-
 # Article 3
 
 Aenean a lorem in libero elementum gravida. Integer tincidunt eu leo et commodo. Donec accumsan tellus sapien. Aenean congue turpis vel odio venenatis laoreet. Praesent ultrices tristique ultrices. Integer placerat pellentesque est, ut laoreet lectus finibus sit amet. Maecenas sem libero, fringilla ut elit ut, auctor tincidunt urna. In id nisl vel enim porta porta ultrices at arcu. In sagittis odio et molestie scelerisque. Vestibulum sed eleifend dui. Nullam augue odio, efficitur sit amet luctus sit amet, laoreet vitae urna. Quisque enim eros, fringilla at felis non, iaculis maximus nisi. Morbi cursus dignissim ligula, eget fringilla ipsum rutrum pharetra. Nunc at efficitur arcu, nec pellentesque tortor. Proin quis magna eu dui facilisis fermentum in eu enim. Aliquam sodales interdum viverra.

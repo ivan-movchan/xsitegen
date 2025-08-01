@@ -1,10 +1,8 @@
 {name}
 
-#### Home &bull; [About me](me/index.html)
-
 # {name}
 
-Hello! This is an example of a static website (blog) that can be built with TinySSG.
+Hello! This is an example of a static website (blog) that can be built with XSiteGen.
 
 ### 2025
 
