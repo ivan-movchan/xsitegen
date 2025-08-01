@@ -79,6 +79,15 @@ for source_dir in directories:
         
         page_text = template_text.replace('{content}', page_content).replace('{title}', source_file_content[0]).replace('{datetime}', page_datetime)
         
+        file_dir = file[2:file.rfind('/')] + '/'
+        if file_dir in spec_variables:
+            for var in spec_variables[file_dir]:
+                page_text = page_text.replace(('{' + var + '}'), spec_variables[file_dir][var])
+        
+        if file in spec_variables:
+            for var in spec_variables[file]:
+                page_text = page_text.replace(('{' + var + '}'), spec_variables[file][var])
+        
         for var in text_variables:
             page_text = page_text.replace(('{' + var + '}'), text_variables[var])
         
