@@ -13,7 +13,7 @@ if __name__ != '__main__':
     die(WARNING_MARKER, 'This module should not be imported.')
 
 if '-v' in sys.argv or '--version' in sys.argv:
-    die('', f'TinySSG {VERSION}\nCopyright (с) 2025 Ivan Movchan\nhttps://github.com/ivan-movchan/tinyssg')
+    die('', f'XSiteGen {VERSION}\nCopyright (с) 2025 Ivan Movchan\nhttps://github.com/ivan-movchan/xsitegen')
 
 try:
     import markdown
