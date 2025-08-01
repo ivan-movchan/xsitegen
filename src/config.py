@@ -33,8 +33,19 @@ datetime_format = '%Y-%m-%d %H:%M:%S UTC'
 
 # Text variables ('name': 'value').
 text_variables = {
+    'menu': 'Home &bull; <a href="me/index.html">About me</a>',
     'name': '{author}\'s Blog',
     'copyright': 'Copyright &copy; 2025 {author}.',
     'author': 'John Doe',
-    'powered_by': 'Powered by <a href="https://github.com/ivan-movchan/tinyssg" target="_blank">TinySSG</a>.'
+    'powered_by': '<a href="https://github.com/ivan-movchan/xsitegen" target="_blank">Powered by XSiteGen</a>'
+}
+
+# Specific variables for different source files.
+spec_variables = {
+    'blog/': {
+        'menu': '<a href="../index.html">Home</a> &bull; <a href="../me/index.html">About me</a>'
+    },
+    'me/': {
+        'menu': '<a href="../index.html">Home</a> &bull; About me'
+    }
 }
