@@ -30,6 +30,10 @@ In `demo` folder you can find an example of a static site that can be generated 
 > [!WARNING]
 > Python-Markdown is an implementation of *John Gruber's Markdown*, not widely used *CommonMark*. You may need to edit source files for more correct transforming source files into HTML.
 
+## Version history
+
+See [CHANGELOG.md](CHANGELOG.md) for details.
+
 ## Contributing
 
 Any feedback and contributions are welcome. Report bugs and suggest new ideas using ["Issues"](https://github.com/ivan-movchan/xsitegen/issues) page or by contacting the developer privately. You are free to fork the repository, improve the project and send a pull request.
