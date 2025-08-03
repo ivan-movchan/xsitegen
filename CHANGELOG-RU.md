@@ -1,6 +1,6 @@
 # История версий XSiteGen
 
-#### [English](CHANGELOG.md) &bull; [Русский](CHANGELOG-RU.md).
+#### [English](CHANGELOG.md) &bull; [Русский](CHANGELOG-RU.md)
 
 ### 1.3 *(2025-08-03)*
 
