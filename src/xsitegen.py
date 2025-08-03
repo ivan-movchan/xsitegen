@@ -25,7 +25,7 @@ try:
         sys.path.insert(0, os.getcwd())
     import config
     from config import *
-    print(INFO_MARKER, f'Loaded configuration module from "{config.__file__}".')
+    print(INFO_MARKER, f'Loaded configuration from "{config.__file__}".')
 except:
     die(ERROR_MARKER, 'Failed to import the configuration module ("config.py"). Please run the module manually to check it for errors, or create it from the template if it does not exist.', 1)
 
