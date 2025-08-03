@@ -4,7 +4,7 @@
 
 # XSiteGen
 
-#### [English](README.md) &bull; [Russian](README-RU.md)
+#### [English](README.md) &bull; [Русский](README-RU.md)
 
 </div>
 
