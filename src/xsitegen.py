@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-VERSION = '1.3 preview'
+VERSION = '1.4 preview'
 INFO_MARKER, WARNING_MARKER, ERROR_MARKER = '(i)', '(!)', '(x)'
 
 import os, sys, datetime
