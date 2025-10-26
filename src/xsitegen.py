@@ -3,17 +3,16 @@
 # See LICENSE for copyright and licensing details.
 
 VERSION = '1.4 preview'
-INFO_MARKER, WARNING_MARKER, ERROR_MARKER = '[*]', '[!]', '[x]'
 
 import os, sys, datetime
 
 try:
     from markdown import markdown
 except:
-    print(WARNING_MARKER, 'Failed to import Python-Markdown. Markdown support is not available.')
+    print('Failed to import Python-Markdown. Markdown support is not available.')
 
-def die(prefix, message, code=0):
-    print(prefix, message, sep=('' if prefix == '' else ' '))
+def die(message, code=0):
+    print(message)
     exit(code)
 
 def read_file(file_name, encoding='UTF-8'):
@@ -57,11 +56,11 @@ def scan_directory(directory):
 
 def generate_page(source_file_name, template_text, target_file_name):
     if os.path.isfile(target_file_name) and not overwrite_pages:
-        print(WARNING_MARKER, f'"{target_file_name}" already exists and will not be overwritten.')
+        print(f'"{target_file_name}" already exists and will not be overwritten.')
         return True
     
     if not prepare_directories(target_file_name):
-        print(ERROR_MARKER, f'Failed to prepare directories for "{target_file_name}" file.')
+        print(f'Failed to prepare directories for "{target_file_name}" file.')
         return False
     
     source_file_lines = read_file(source_file_name, file_encoding).splitlines()
@@ -93,7 +92,7 @@ def generate_page(source_file_name, template_text, target_file_name):
         page_text = page_text.replace(('{' + variable + '}'), global_variables[variable])
     
     if not write_file(target_file_name, page_text, file_encoding):
-        print(ERROR_MARKER, f'Failed to write "{target_file_name}" file.')
+        print(f'Failed to write "{target_file_name}" file.')
         return False
     
     return True
@@ -104,17 +103,17 @@ def main():
 
     for source_directory in directories:
         if not os.path.isdir(source_directory):
-            die(ERROR_MARKER, f'"{source_directory}" does not exist or is not a directory.', 2)
+            die(f'"{source_directory}" does not exist or is not a directory.', 2)
         
         template_file_name = template_files[source_directory]
         template_text = read_file(template_file_name, file_encoding)
         
         if template_text == None:
-            print(ERROR_MARKER, f'Failed to read "{template_file_name}" file.')
+            print(f'Failed to read "{template_file_name}" file.')
             continue
         
         source_files = scan_directory(source_directory)
-        print(INFO_MARKER, f'"{source_directory}": {len(source_files)} file(s).')
+        print(f'"{source_directory}": {len(source_files)} file(s).')
         
         target_directory = directories[source_directory]
         
@@ -124,9 +123,9 @@ def main():
                 target_file_name = f'{target_directory}/{source_file}'.replace('/./', '/').replace(f'.{source_file_extension}', '.html')
                 
                 if generate_page(source_file_name, template_text, target_file_name):
-                    print(INFO_MARKER, f'Generated "{target_file_name}" page.')
+                    print(f'Generated "{target_file_name}" page.')
                 else:
-                    print(ERROR_MARKER, f'Failed to generate "{target_file_name}" page.')
+                    print(f'Failed to generate "{target_file_name}" page.')
             
 try:
     if not os.getcwd() in sys.path:
@@ -135,14 +134,14 @@ try:
     import config
     from config import *
     
-    print(INFO_MARKER, f'Using configuration module "{config.__file__}".')
+    print(f'Using configuration module "{config.__file__}".')
 except Exception as e:
     if e == ModuleNotFoundError:
-        die(ERROR_MARKER, 'The configuration module ("config.py") was not found.\nPlease create it from the template, or run XSiteGen in another directory\nwhere the module exists.', 1)
+        die('The configuration module ("config.py") was not found.\nPlease create it from the template, or run XSiteGen in another directory\nwhere the module exists.', 1)
     else:
-        die(ERROR_MARKER, f'The configuration module ("config.py") has an error:\n{e}', 1)
+        die(f'The configuration module ("config.py") has an error:\n{e}', 1)
 
 if __name__ == '__main__':
     main()
 else:
-    die(ERROR_MARKER, 'This module should not be imported.', 42)
+    die('This module should not be imported.', 42)
