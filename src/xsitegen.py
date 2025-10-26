@@ -135,9 +135,12 @@ try:
     import config
     from config import *
     
-    print(INFO_MARKER, f'Loaded configuration from "{config.__file__}".')
-except:
-    die(ERROR_MARKER, 'Failed to import the configuration module ("config.py"). Please run the module manually to check it for errors, or create it from the template if it does not exist.', 1)
+    print(INFO_MARKER, f'Using configuration module "{config.__file__}".')
+except Exception as e:
+    if e == ModuleNotFoundError:
+        die(ERROR_MARKER, 'The configuration module ("config.py") was not found.\nPlease create it from the template, or run XSiteGen in another directory\nwhere the module exists.', 1)
+    else:
+        die(ERROR_MARKER, f'The configuration module ("config.py") has an error:\n{e}', 1)
 
 if __name__ == '__main__':
     main()
