@@ -1,106 +1,145 @@
 #!/usr/bin/python3
+# This file is a part of XSiteGen project.
+# See LICENSE for copyright and licensing details.
 
 VERSION = '1.4 preview'
-INFO_MARKER, WARNING_MARKER, ERROR_MARKER = '(i)', '(!)', '(x)'
+INFO_MARKER, WARNING_MARKER, ERROR_MARKER = '[*]', '[!]', '[x]'
 
 import os, sys, datetime
+
+try:
+    from markdown import markdown
+except:
+    print(WARNING_MARKER, 'Failed to import Python-Markdown. Markdown support is not available.')
 
 def die(prefix, message, code=0):
     print(prefix, message, sep=('' if prefix == '' else ' '))
     exit(code)
 
-if __name__ != '__main__':
-    die(WARNING_MARKER, 'This module should not be imported.')
+def read_file(file_name, encoding='UTF-8'):
+    content = None
+    
+    try:
+        file = open(file_name, 'r', encoding=encoding)
+        content = file.read()
+        file.close()
+    except:
+        pass
+    
+    return content
 
-if '-v' in sys.argv or '--version' in sys.argv:
-    die('', f'XSiteGen {VERSION}\nCopyright (с) 2025 Ivan Movchan\nhttps://github.com/ivan-movchan/xsitegen')
+def write_file(file_name, content, encoding='UTF-8'):
+    try:
+        file = open(file_name, 'w', encoding=encoding)
+        file.write(content)
+        file.close()
+        
+        return True
+    except:
+        return False
 
-try:
-    import markdown
-except:
-    print(WARNING_MARKER, 'Failed to import "markdown" module. Markdown support is not available.')
+def prepare_directories(file_name):
+    try:
+        os.makedirs(file_name[:file_name.rfind('/')], exist_ok=True)
+        return True
+    except:
+        return False
 
+def scan_directory(directory):
+    content = []
+    
+    for root, directories, files in os.walk(directory):
+        for file in files:
+            item = root.replace(directory, '.') + '/' + file
+            content.append(item.replace('\\', '/'))
+    
+    return content
+
+def generate_page(source_file_name, template_text, target_file_name):
+    if os.path.isfile(target_file_name) and not overwrite_pages:
+        print(WARNING_MARKER, f'"{target_file_name}" already exists and will not be overwritten.')
+        return True
+    
+    if not prepare_directories(target_file_name):
+        print(ERROR_MARKER, f'Failed to prepare directories for "{target_file_name}" file.')
+        return False
+    
+    source_file_lines = read_file(source_file_name, file_encoding).splitlines()
+    page_content = '\n'.join(source_file_lines[2:])
+    
+    try:
+        page_content = markdown(page_content, output_format='html')
+    except:
+        pass
+    
+    page_datetime = datetime.datetime.now().astimezone(datetime_zone).strftime(datetime_format)
+    
+    page_text = template_text.replace('{content}', page_content)
+    page_text = page_text.replace('{title}', source_file_lines[0])
+    page_text = page_text.replace('{datetime}', page_datetime)
+    
+    slash_index = -1
+    while True:
+        slash_index = source_file_name.find('/', slash_index+1)
+        if slash_index == -1:
+            break
+        
+        directory = source_file_name[:slash_index]
+        if directory in directory_variables:
+            for variable in directory_variables[directory]:
+                page_text = page_text.replace(('{' + variable + '}'), directory_variables[directory][variable])
+    
+    for variable in global_variables:
+        page_text = page_text.replace(('{' + variable + '}'), global_variables[variable])
+    
+    if not write_file(target_file_name, page_text, file_encoding):
+        print(ERROR_MARKER, f'Failed to write "{target_file_name}" file.')
+        return False
+    
+    return True
+
+def main():
+    if '-v' in sys.argv or '--version' in sys.argv:
+        die('', f'XSiteGen {VERSION}\nCopyright (с) 2025 Ivan Movchan\nhttps://github.com/ivan-movchan/xsitegen')
+
+    for source_directory in directories:
+        if not os.path.isdir(source_directory):
+            die(ERROR_MARKER, f'"{source_directory}" does not exist or is not a directory.', 2)
+        
+        template_file_name = template_files[source_directory]
+        template_text = read_file(template_file_name, file_encoding)
+        
+        if template_text == None:
+            print(ERROR_MARKER, f'Failed to read "{template_file_name}" file.')
+            continue
+        
+        source_files = scan_directory(source_directory)
+        print(INFO_MARKER, f'"{source_directory}": {len(source_files)} file(s).')
+        
+        target_directory = directories[source_directory]
+        
+        for source_file in source_files:
+            if source_file.endswith(f'.{source_file_extension}'):
+                source_file_name = f'{source_directory}/{source_file}'.replace('/./', '/')
+                target_file_name = f'{target_directory}/{source_file}'.replace('/./', '/').replace(f'.{source_file_extension}', '.html')
+                
+                if generate_page(source_file_name, template_text, target_file_name):
+                    print(INFO_MARKER, f'Generated "{target_file_name}" page.')
+                else:
+                    print(ERROR_MARKER, f'Failed to generate "{target_file_name}" page.')
+            
 try:
     if not os.getcwd() in sys.path:
         sys.path.insert(0, os.getcwd())
+    
     import config
     from config import *
+    
     print(INFO_MARKER, f'Loaded configuration from "{config.__file__}".')
 except:
     die(ERROR_MARKER, 'Failed to import the configuration module ("config.py"). Please run the module manually to check it for errors, or create it from the template if it does not exist.', 1)
 
-for source_dir in directories:
-    if not os.path.isdir(source_dir):
-        die(ERROR_MARKER, f'"{source_dir}" does not exist or is not a directory.', 2)
-    
-    try:
-        template_file = open(template_files[source_dir], 'r', encoding=file_encoding)
-        template_text = template_file.read()
-        template_file.close()
-    except:
-        die(ERROR_MARKER, f'Failed to read "{template_files[source_dir]}" file.', 2)
-    
-    source_files = []
-    for root, dirs, files in os.walk(source_dir):
-        for file in files:
-            if file.endswith(f'.{source_file_extension}'):
-                new_file = root.replace(source_dir, '.').replace('\\', '/') + '/' + file.replace('\\', '/')
-                source_files.append(new_file)
-    
-    print(INFO_MARKER, f'"{source_dir}" has {len(source_files)} source file(s).')
-    
-    target_dir = directories[source_dir]
-    
-    for file in source_files:
-        source_file_name = f'{source_dir}/{file}'.replace('/./', '/')
-        target_file_name = f'{target_dir}/{file}'.replace('/./', '/').replace(f'.{source_file_extension}', '.html')
-        
-        if os.path.isfile(target_file_name) and not overwrite_webpages:
-            print(WARNING_MARKER, f'"{target_file_name}" already exists and will not be overwritten.')
-            continue
-        
-        target_dirs = target_file_name[:target_file_name.rfind('/')]
-        try:
-            os.makedirs(target_dirs, exist_ok=True)
-        except:
-            die(ERROR_MARKER, f'Failed to create target directories ("{target_dirs}").', 2)
-        
-        print(INFO_MARKER, f'Generating "{target_file_name}" page.')
-        
-        source_file = open(source_file_name, 'r', encoding=file_encoding)
-        source_file_content = source_file.read().split('\n')
-        source_file.close()
-        
-        page_content = '\n'.join(source_file_content[2:])
-        try:
-            page_content = markdown.markdown(page_content, output_format='html')
-        except:
-            page_content = page_content
-        
-        page_datetime = datetime.datetime.now().astimezone(datetime_zone).strftime(datetime_format)
-        
-        page_text = template_text.replace('{content}', page_content).replace('{title}', source_file_content[0]).replace('{datetime}', page_datetime)
-        
-        right_slash_index = source_file_name.find('/')
-        while right_slash_index != -1:
-            right_slash_index = source_file_name.find('/', right_slash_index+1)
-            if right_slash_index == -1:
-                break
-            file_dir = source_file_name[2:right_slash_index] + '/'
-            if file_dir in spec_variables:
-                for var in spec_variables[file_dir]:
-                    page_text = page_text.replace(('{' + var + '}'), spec_variables[file_dir][var])
-        
-        if file in spec_variables:
-            for var in spec_variables[file]:
-                page_text = page_text.replace(('{' + var + '}'), spec_variables[file][var])
-        
-        for var in text_variables:
-            page_text = page_text.replace(('{' + var + '}'), text_variables[var])
-        
-        try:
-            target_file = open(target_file_name, 'w', encoding=file_encoding)
-            target_file.write(page_text)
-            target_file.close()
-        except:
-            print(ERROR_MARKER, f'Failed to write "{target_file_name}" file.')
+if __name__ == '__main__':
+    main()
+else:
+    die(ERROR_MARKER, 'This module should not be imported.', 42)

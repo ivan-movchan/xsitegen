@@ -1,13 +1,15 @@
 #!/usr/bin/python3
+# This file is a part of XSiteGen project.
+# See LICENSE for copyright and licensing details.
 
 import datetime
 
-# Directories ('source': target').
+# Source and target directories.
 directories = {
     '../demo/src': '../demo/build'
 }
 
-# Template files ('source': 'template_file').
+# Template files.
 template_files = {
     '../demo/src': '../demo/src/_template.html'
 }
@@ -18,8 +20,8 @@ file_encoding = 'UTF-8'
 # Source file extension.
 source_file_extension = 'md'
 
-# Overwrite existing webpages?
-overwrite_webpages = False
+# Overwrite existing pages?
+overwrite_pages = False
 
 # Date/time zone.
 # datetime.timezone.utc = UTC, None = your local time zone.
@@ -31,8 +33,8 @@ datetime_zone = datetime.timezone.utc
 # See https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes for details.
 datetime_format = '%Y-%m-%d %H:%M:%S UTC'
 
-# Text variables ('name': 'value').
-text_variables = {
+# Global variables, applied to every source file.
+global_variables = {
     'menu': 'Home &bull; <a href="me/index.html">About me</a>',
     'name': '{author}\'s Blog',
     'copyright': 'Copyright &copy; 2025 {author}.',
@@ -40,12 +42,12 @@ text_variables = {
     'powered_by': '<a href="https://github.com/ivan-movchan/xsitegen" target="_blank">Powered by XSiteGen</a>'
 }
 
-# Specific variables for different source files.
-spec_variables = {
-    'blog/': {
+# Directory variables, applied to every source file in specified directories.
+directory_variables = {
+    '../demo/src/blog': {
         'menu': '<a href="../index.html">Home</a> &bull; <a href="../me/index.html">About me</a>'
     },
-    'me/': {
+    '../demo/src/me': {
         'menu': '<a href="../index.html">Home</a> &bull; About me'
     }
 }
