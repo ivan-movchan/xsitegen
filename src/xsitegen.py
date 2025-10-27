@@ -98,9 +98,6 @@ def generate_page(source_file_name, template_text, target_file_name):
     return True
 
 def main():
-    if '-v' in sys.argv or '--version' in sys.argv:
-        die('', f'XSiteGen {VERSION}\nCopyright (с) 2025 Ivan Movchan\nhttps://github.com/ivan-movchan/xsitegen')
-
     for source_directory in directories:
         if not os.path.isdir(source_directory):
             die(f'"{source_directory}" does not exist or is not a directory.', 2)
@@ -126,7 +123,16 @@ def main():
                     print(f'Generated "{target_file_name}" page.')
                 else:
                     print(f'Failed to generate "{target_file_name}" page.')
-            
+
+def pre_main():
+    if '-v' in sys.argv or '--version' in sys.argv:
+        die(f'XSiteGen {VERSION}\nCopyright (с) 2025 Ivan Movchan\nhttps://github.com/ivan-movchan/xsitegen')
+
+if __name__ == '__main__':
+    pre_main()
+else:
+    die('This module should not be imported.', 42)
+
 try:
     if not os.getcwd() in sys.path:
         sys.path.insert(0, os.getcwd())
@@ -143,5 +149,3 @@ except Exception as e:
 
 if __name__ == '__main__':
     main()
-else:
-    die('This module should not be imported.', 42)
