@@ -90,16 +90,18 @@ def main():
         print(f'Working with directory: {source_directory}.')
         
         if not os.path.exists(source_directory):
-            die('The directory does not exist.', 2)
+            print('The directory does not exist. Ignoring.')
+            continue
         
         if not os.path.isdir(source_directory):
-            die('This is not a directory.', 2)
+            print('This is not a directory. Ignoring.')
+            continue
         
         template_file_name = template_files[source_directory]
         template_text = read_file(template_file_name, file_encoding)
         
         if template_text == None:
-            print(f'Failed to open and read template file {template_file_name}.')
+            print(f'Failed to open and read template file {template_file_name}. Ignoring.')
             continue
         
         target_directory = directories[source_directory]
