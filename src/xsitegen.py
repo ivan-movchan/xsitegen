@@ -86,6 +86,8 @@ def generate_page(source_file_name, template_text, target_file_name):
     return write_file(target_file_name, page_text, file_encoding)
 
 def main():
+    start_time = datetime.datetime.now()
+    
     for source_directory in directories:
         print(f'Working with directory: {source_directory}.')
         
@@ -127,7 +129,12 @@ def main():
                     print(f'Written {target_file_name}.')
                 else:
                     print(f'Failed to write {target_file_name}.')
-
+    
+    end_time = datetime.datetime.now()
+    work_time = (end_time - start_time)
+    
+    print(f'Finished in {work_time}.')
+    
 def pre_main():
     if '-v' in sys.argv or '--version' in sys.argv:
         die(f'XSiteGen {VERSION}\nCopyright (с) 2025 Ivan Movchan\nhttps://github.com/ivan-movchan/xsitegen')
