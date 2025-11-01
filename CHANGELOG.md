@@ -1,6 +1,21 @@
-# XSiteGen changelog
+<div align="center">
+
+![](images/logo.png)
+
+# XSiteGen: changelog
 
 #### [English](CHANGELOG.md) &bull; [Русский](CHANGELOG-RU.md)
+
+</div>
+
+### 1.4 *(in development)*
+
+- Ultimate code refactoring done.
+- Made the log more detailed.
+- Implemented copying files placed in source directories (if required).
+- Improved configuration module import error handling. If the module has an error, a short message describing occurred error will be shown. If the module was not found, the user will be suggested to create a new configuration module or switch the directory and run XSiteGen again.
+- Python-Markdown version is now being displayed after load.
+- XSiteGen working time will be shown after finishing.
 
 ### 1.3 *(2025-08-03)*
 
