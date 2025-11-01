@@ -4,7 +4,7 @@
 
 VERSION = '1.4 preview'
 
-import os, sys, datetime
+import os, sys, datetime, shutil
 
 def die(message, code=0):
     print(message)
@@ -48,6 +48,13 @@ def scan_directory(directory):
             content.append(item.replace('\\', '/'))
     
     return content
+
+def copy_file(source_file_name, target_file_name):
+    try:
+        shutil.copy2(source_file_name, target_file_name)
+        return True
+    except:
+        return False
 
 def generate_page(source_file_name, template_text, target_file_name):
     source_file_lines = read_file(source_file_name, file_encoding).splitlines()
@@ -108,9 +115,11 @@ def main():
         print(f'{len(source_files)} file(s) detected.')
         
         for source_file in source_files:
+            source_file_name = f'{source_directory}/{source_file}'.replace('/./', '/')
+            target_file_name = f'{target_directory}/{source_file}'.replace('/./', '/')
+            
             if source_file.endswith(f'.{source_file_extension}'):
-                source_file_name = f'{source_directory}/{source_file}'.replace('/./', '/')
-                target_file_name = f'{target_directory}/{source_file}'.replace('/./', '/').replace(f'.{source_file_extension}', '.html')
+                target_file_name = target_file_name.replace(f'.{source_file_extension}', '.html')
                 
                 if os.path.isfile(target_file_name) and not overwrite_pages:
                     print(f'Ignoring {target_file_name}.')
@@ -124,6 +133,20 @@ def main():
                     print(f'Written {target_file_name}.')
                 else:
                     print(f'Failed to write {target_file_name}.')
+            else:
+                if copy_files:
+                    if (source_file_name in file_copy_blacklist) or (os.path.isfile(target_file_name) and not overwrite_files):
+                        print(f'Ignoring {target_file_name}.')
+                        continue
+                    
+                    if not prepare_directories(target_file_name):
+                        print(f'Failed to prepare directories for {target_file_name}.')
+                        continue
+                
+                    if copy_file(source_file_name, target_file_name):
+                        print(f'Written {target_file_name}.')
+                    else:
+                        print(f'Failed to write {target_file_name}.')
     
     end_time = datetime.datetime.now()
     work_time = (end_time - start_time)

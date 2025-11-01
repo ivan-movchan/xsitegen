@@ -23,6 +23,15 @@ source_file_extension = 'md'
 # Overwrite existing pages?
 overwrite_pages = False
 
+# Copy files placed in source directories?
+copy_files = True
+
+# Overwrite files?
+overwrite_files = True
+
+# Files that should not be copied (copy_files must be active).
+file_copy_blacklist = [ '../demo/src/_template.html' ]
+
 # Date/time zone.
 # datetime.timezone.utc = UTC, None = your local time zone.
 # See https://docs.python.org/3/library/datetime.html#datetime.datetime.astimezone for details.
