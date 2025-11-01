@@ -6,11 +6,6 @@ VERSION = '1.4 preview'
 
 import os, sys, datetime
 
-try:
-    from markdown import markdown
-except:
-    print('Failed to import Python-Markdown. Markdown support is not available.')
-
 def die(message, code=0):
     print(message)
     exit(code)
@@ -157,6 +152,12 @@ except Exception as e:
         die('The configuration module ("config.py") was not found.\nPlease create it from the template, or run XSiteGen in another directory\nwhere the module exists.', 1)
     else:
         die(f'The configuration module ("config.py") has an error:\n{e}', 1)
+
+try:
+    from markdown import markdown, __version_info__
+    print(f'Powered by Python-Markdown {'.'.join(map(str, __version_info__))}.')
+except:
+    print('Failed to import Python-Markdown. Markdown support is not available.')
 
 if __name__ == '__main__':
     main()
