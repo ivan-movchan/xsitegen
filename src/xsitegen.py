@@ -2,7 +2,7 @@
 # This file is a part of XSiteGen project.
 # See LICENSE for copyright and licensing details.
 
-VERSION = '1.4 preview'
+VERSION = '1.4-develop'
 
 import os, sys, datetime, shutil
 
