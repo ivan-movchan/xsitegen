@@ -2,6 +2,8 @@
 
 # {name}
 
+<img style="float:right;" src="picture.png">
+
 Hello! This is an example of a static website (blog) that can be built with XSiteGen.
 
 ### 2025
