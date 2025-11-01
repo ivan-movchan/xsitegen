@@ -84,7 +84,7 @@ def main():
     start_time = datetime.datetime.now()
     
     for source_directory in directories:
-        print(f'Working with directory: {source_directory}.')
+        print(f'Working with directory {source_directory}.')
         
         if not os.path.exists(source_directory):
             print('The directory does not exist. Ignoring.')
@@ -102,7 +102,7 @@ def main():
             continue
         
         target_directory = directories[source_directory]
-        print(f'Target directory: {target_directory}.')
+        print(f'Target directory is {target_directory}.')
         
         source_files = scan_directory(source_directory)
         print(f'{len(source_files)} file(s) detected.')
@@ -146,7 +146,7 @@ try:
     import config
     from config import *
     
-    print(f'Using configuration module "{config.__file__}".')
+    print(f'Using configuration module {config.__file__}.')
 except Exception as e:
     if e == ModuleNotFoundError:
         die('The configuration module ("config.py") was not found.\nPlease create it from the template, or run XSiteGen in another directory\nwhere the module exists.', 1)
