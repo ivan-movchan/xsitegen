@@ -58,7 +58,35 @@ def copy_file(source_file_name, target_file_name):
 
 def generate_page(source_file_name, template_text, target_file_name):
     source_file_lines = read_file(source_file_name, file_encoding).splitlines()
-    page_content = '\n'.join(source_file_lines[2:])
+    page_content_start = -1
+    page_variables = {}
+    
+    if source_file_lines[0] == '---':
+        page_content_start = 1
+        
+        while source_file_lines[page_content_start] != '---':
+            if page_content_start == len(source_file_lines):
+                print('The end of page variable block was not found.')
+                return False
+            
+            current_line = source_file_lines[page_content_start]
+            delimeter_index = current_line.find(':')
+            page_variable_name = current_line
+            page_variable_value = ''
+            
+            if delimeter_index != -1:
+                page_variable_name = current_line[:delimeter_index]
+                
+                if delimeter_index != (len(current_line) - 1):
+                    page_variable_value = current_line[delimeter_index+1:]
+                    
+                    while page_variable_value[0] == ' ':
+                        page_variable_value = page_variable_value[1:]
+            
+            page_variables[page_variable_name] = page_variable_value
+            page_content_start += 1
+    
+    page_content = '\n'.join(source_file_lines[page_content_start+1:])
     
     try:
         page_content = markdown(page_content, output_format='html')
@@ -68,8 +96,10 @@ def generate_page(source_file_name, template_text, target_file_name):
     page_datetime = datetime.datetime.now().astimezone(datetime_zone).strftime(datetime_format)
     
     page_text = template_text.replace('{content}', page_content)
-    page_text = page_text.replace('{title}', source_file_lines[0])
     page_text = page_text.replace('{datetime}', page_datetime)
+    
+    for variable in page_variables:
+        page_text = page_text.replace(('{' + variable + '}'), page_variables[variable])
     
     slash_index = -1
     while True:
