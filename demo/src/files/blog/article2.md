@@ -1,6 +1,11 @@
-Article 2 | {name}
+---
+title: Article 2 | {name}
+date: 2025-11-02
+---
 
 # Article 2
+
+#### *{date}*
 
 Nulla in ante vitae nunc consectetur laoreet at ut enim. Fusce dignissim diam in aliquet lobortis. Aenean viverra viverra vestibulum. Aenean imperdiet nunc augue, eget maximus dolor viverra et. Praesent placerat, nulla eu finibus interdum, diam sapien gravida diam, eu volutpat arcu odio id ante. Suspendisse potenti. Praesent aliquet pellentesque quam, non placerat nulla pretium aliquet. Cras ultrices quis massa eu faucibus. Vestibulum aliquet, lorem a ullamcorper auctor, velit est feugiat ante, a lobortis est lectus nec dui. Nulla tortor nunc, scelerisque sit amet consectetur in, faucibus nec massa. Proin volutpat urna tempor, vestibulum nisl nec, vestibulum odio. Fusce ultrices dignissim libero sit amet rhoncus. Mauris rutrum ipsum in porta rutrum. Ut sit amet fringilla quam. Interdum et malesuada fames ac ante ipsum primis in faucibus.
 

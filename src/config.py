@@ -6,12 +6,12 @@ import datetime
 
 # Source and target directories.
 directories = {
-    '../demo/src': '../demo/build'
+    '../demo/src/files': '../demo/build'
 }
 
 # Template files.
 template_files = {
-    '../demo/src': '../demo/src/_template.html'
+    '../demo/src/files': '../demo/src/templates/template.html'
 }
 
 # File encoding (should be specified to avoid file read/write errors).
@@ -59,10 +59,10 @@ global_variables = {
 
 # Directory variables, applied to every source file in specified directories.
 directory_variables = {
-    '../demo/src/blog': {
+    '../demo/src/files/blog': {
         'menu': '<a href="../index.html">Home</a> &bull; <a href="../me/index.html">About me</a>'
     },
-    '../demo/src/me': {
+    '../demo/src/files/me': {
         'menu': '<a href="../index.html">Home</a> &bull; About me'
     }
 }

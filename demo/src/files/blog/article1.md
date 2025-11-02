@@ -1,6 +1,11 @@
-Article 1 | {name}
+---
+title: Article 1 | {name}
+date: 2025-11-02
+---
 
 # Article 1
+
+#### *{date}*
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut placerat iaculis velit in interdum. Donec porta, sem eget aliquet bibendum, tellus diam pulvinar quam, id tempor lacus nunc et nibh. Nulla id odio vitae neque lacinia dignissim at sed velit. Phasellus posuere, libero sit amet varius feugiat, odio arcu malesuada dui, in vehicula felis nisl non ex. Sed elementum lacinia orci, id lacinia dui cursus vel. Curabitur a risus sed ante vulputate pharetra. Nunc vestibulum nibh sed ultrices porta. Aliquam mollis arcu mi, non mattis nulla suscipit scelerisque. Phasellus id ante nunc. Quisque varius fringilla tellus sit amet malesuada. Praesent bibendum ex et tellus rutrum vulputate. Aliquam dignissim nisi ut purus bibendum imperdiet. Mauris consequat lacus at egestas efficitur. Donec et tortor at nibh commodo posuere vel non tortor. Aliquam consequat, nisl vitae ullamcorper interdum, turpis mauris condimentum nisl, a tempor magna felis a sapien.
 

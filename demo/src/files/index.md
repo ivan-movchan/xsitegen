@@ -1,4 +1,6 @@
-{name}
+---
+title: {name}
+---
 
 # {name}
 
