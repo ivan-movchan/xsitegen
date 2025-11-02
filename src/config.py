@@ -20,6 +20,12 @@ file_encoding = 'UTF-8'
 # Source file extension.
 source_file_extension = 'md'
 
+# Use tab indent? (False = use spaces.)
+use_tab_indent = False
+
+# Indent size.
+indent_size = 8
+
 # Overwrite existing pages?
 overwrite_pages = False
 

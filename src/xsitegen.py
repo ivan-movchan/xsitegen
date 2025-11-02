@@ -93,6 +93,14 @@ def generate_page(source_file_name, template_text, target_file_name):
     except:
         pass
     
+    page_content_lines = page_content.splitlines()
+    
+    for i in range(len(page_content_lines)):
+        new_line = (('\t' * indent_size) if use_tab_indent else (' ' * indent_size)) + page_content_lines[i]
+        page_content_lines[i] = new_line
+    
+    page_content = '\n'.join(page_content_lines)
+    
     page_datetime = datetime.datetime.now().astimezone(datetime_zone).strftime(datetime_format)
     
     page_text = template_text.replace('{content}', page_content)
