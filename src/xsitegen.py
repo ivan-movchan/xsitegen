@@ -89,7 +89,7 @@ def generate_page(source_file_name, template_text, target_file_name):
     page_content = '\n'.join(source_file_lines[page_content_start+1:])
     
     try:
-        page_content = markdown(page_content, output_format='html')
+        page_content = markdown(page_content, output_format='html', extensions=markdown_extensions)
     except:
         pass
     

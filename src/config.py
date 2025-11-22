@@ -33,7 +33,7 @@ overwrite_pages = False
 copy_files = True
 
 # Overwrite files?
-overwrite_files = True
+overwrite_files = False
 
 # Files that should not be copied (copy_files must be active).
 file_copy_blacklist = [ '../demo/src/_template.html' ]
@@ -66,3 +66,8 @@ directory_variables = {
         'menu': '<a href="../index.html">Home</a> &bull; About me'
     }
 }
+
+# Python-Markdown extensions.
+# Default value is [ 'md_in_html', 'nl2br' ].
+# See https://python-markdown.github.io/extensions/ for details.
+markdown_extensions = [ 'md_in_html', 'nl2br' ]
