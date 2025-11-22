@@ -194,6 +194,11 @@ def main():
 def pre_main():
     if '-v' in sys.argv or '--version' in sys.argv:
         die(f'XSiteGen {VERSION}\nCopyright (с) 2025 Ivan Movchan\nhttps://github.com/ivan-movchan/xsitegen')
+    
+    if sys.version_info.minor < 9:
+        die('Python 3.9 or newer is required.', 3)
+    else:
+        print(f'Powered by Python {'.'.join(map(str, sys.version_info))}.')
 
 if __name__ == '__main__':
     pre_main()
