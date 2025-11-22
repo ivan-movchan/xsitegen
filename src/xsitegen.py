@@ -129,7 +129,7 @@ def main():
     start_time = datetime.datetime.now()
     
     for source_directory in directories:
-        print(f'Working with directory {source_directory}.')
+        print(f'Working with directory "{source_directory}".')
         
         if not os.path.exists(source_directory):
             print('The directory does not exist. Ignoring.')
@@ -143,11 +143,11 @@ def main():
         template_text = read_file(template_file_name, file_encoding)
         
         if template_text == None:
-            print(f'Failed to open and read template file {template_file_name}. Ignoring.')
+            print(f'Failed to open and read template file "{template_file_name}". Ignoring.')
             continue
         
         target_directory = directories[source_directory]
-        print(f'Target directory is {target_directory}.')
+        print(f'Target directory is "{target_directory}".')
         
         source_files = scan_directory(source_directory)
         print(f'{len(source_files)} file(s) detected.')
@@ -160,31 +160,31 @@ def main():
                 target_file_name = target_file_name.replace(f'.{source_file_extension}', '.html')
                 
                 if os.path.isfile(target_file_name) and not overwrite_pages:
-                    print(f'Ignoring {target_file_name}.')
+                    print(f'Ignoring file "{target_file_name}".')
                     continue
                 
                 if not prepare_directories(target_file_name):
-                    print(f'Failed to prepare directories for {target_file_name}.')
+                    print(f'Failed to prepare directories for the file "{target_file_name}".')
                     continue
                 
                 if generate_page(source_file_name, template_text, target_file_name):
-                    print(f'Written {target_file_name}.')
+                    print(f'Written file "{target_file_name}".')
                 else:
-                    print(f'Failed to write {target_file_name}.')
+                    print(f'Failed to write file "{target_file_name}".')
             else:
                 if copy_files:
                     if (source_file_name in file_copy_blacklist) or (os.path.isfile(target_file_name) and not overwrite_files):
-                        print(f'Ignoring {target_file_name}.')
+                        print(f'Ignoring file "{target_file_name}".')
                         continue
                     
                     if not prepare_directories(target_file_name):
-                        print(f'Failed to prepare directories for {target_file_name}.')
+                        print(f'Failed to prepare directories for file "{target_file_name}".')
                         continue
                 
                     if copy_file(source_file_name, target_file_name):
-                        print(f'Written {target_file_name}.')
+                        print(f'Written file "{target_file_name}".')
                     else:
-                        print(f'Failed to write {target_file_name}.')
+                        print(f'Failed to write file "{target_file_name}".')
     
     end_time = datetime.datetime.now()
     work_time = (end_time - start_time)
@@ -207,7 +207,7 @@ try:
     import config
     from config import *
     
-    print(f'Using configuration module {config.__file__}.')
+    print(f'Using configuration module "{config.__file__}".')
 except Exception as e:
     if e == ModuleNotFoundError:
         die('The configuration module ("config.py") was not found.\nPlease create it from the template, or run XSiteGen in another directory\nwhere the module exists.', 1)
