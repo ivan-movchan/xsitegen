@@ -36,7 +36,7 @@ copy_files = True
 overwrite_files = False
 
 # Files that should not be copied (copy_files must be active).
-file_copy_blacklist = [ './demo/src/_template.html' ]
+file_copy_blacklist = [ ]
 
 # Date/time zone.
 # datetime.timezone.utc = UTC, None = your local time zone.
