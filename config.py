@@ -6,12 +6,12 @@ import datetime
 
 # Source and target directories.
 directories = {
-    '../demo/src/files': '../demo/build'
+    './demo/src/files': './demo/build'
 }
 
 # Template files.
 template_files = {
-    '../demo/src/files': '../demo/src/templates/template.html'
+    './demo/src/files': './demo/src/templates/template.html'
 }
 
 # File encoding (should be specified to avoid file read/write errors).
@@ -36,7 +36,7 @@ copy_files = True
 overwrite_files = False
 
 # Files that should not be copied (copy_files must be active).
-file_copy_blacklist = [ '../demo/src/_template.html' ]
+file_copy_blacklist = [ './demo/src/_template.html' ]
 
 # Date/time zone.
 # datetime.timezone.utc = UTC, None = your local time zone.
