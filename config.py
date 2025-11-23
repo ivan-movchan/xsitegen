@@ -59,10 +59,10 @@ global_variables = {
 
 # Directory variables, applied to every source file in specified directories.
 directory_variables = {
-    '../demo/src/files/blog': {
+    './demo/src/files/blog': {
         'menu': '<a href="../index.html">Home</a> &bull; <a href="../me/index.html">About me</a>'
     },
-    '../demo/src/files/me': {
+    './demo/src/files/me': {
         'menu': '<a href="../index.html">Home</a> &bull; About me'
     }
 }
