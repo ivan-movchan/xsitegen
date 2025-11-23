@@ -147,6 +147,10 @@ def main():
             print(f'Failed to open and read template file "{template_file_name}". Ignoring.')
             continue
         
+        if not '{content}' in template_text:
+            print(f'Template file "{template_file_name}" does not contain', '{content}', 'variable mention. Ignoring.')
+            continue
+        
         target_directory = directories[source_directory]
         print(f'Target directory is "{target_directory}".')
         
