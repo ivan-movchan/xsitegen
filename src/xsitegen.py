@@ -165,7 +165,7 @@ def main():
                 target_file_name = target_file_name.replace(f'.{source_file_extension}', '.html')
                 
                 if os.path.isfile(target_file_name) and not overwrite_pages:
-                    print(f'Ignoring file "{target_file_name}".')
+                    print(f'Not overwriting file "{target_file_name}".')
                     continue
                 
                 if not prepare_directories(target_file_name):
@@ -178,8 +178,12 @@ def main():
                     print(f'Failed to write file "{target_file_name}".')
             else:
                 if copy_files:
-                    if (source_file_name in file_copy_blacklist) or (os.path.isfile(target_file_name) and not overwrite_files):
-                        print(f'Ignoring file "{target_file_name}".')
+                    if source_file_name in file_copy_blacklist:
+                        print(f'Not copying file "{source_file_name}".')
+                        continue
+                    
+                    if (os.path.isfile(target_file_name) and not overwrite_files):
+                        print(f'Not overwriting file "{target_file_name}".')
                         continue
                     
                     if not prepare_directories(target_file_name):
