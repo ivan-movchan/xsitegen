@@ -3,6 +3,7 @@
 # See LICENSE for copyright and licensing details.
 
 VERSION = '1.4-develop'
+DEFAULT_ENCODING = 'UTF-8'
 
 import os, sys, datetime, shutil
 
@@ -10,7 +11,7 @@ def die(message, code=0):
     print(message)
     exit(code)
 
-def read_file(file_name, encoding='UTF-8'):
+def read_file(file_name, encoding=DEFAULT_ENCODING):
     content = None
     
     try:
@@ -22,7 +23,7 @@ def read_file(file_name, encoding='UTF-8'):
     
     return content
 
-def write_file(file_name, content, encoding='UTF-8'):
+def write_file(file_name, content, encoding=DEFAULT_ENCODING):
     try:
         file = open(file_name, 'w', encoding=encoding)
         file.write(content)
