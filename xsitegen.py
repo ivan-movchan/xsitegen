@@ -2,10 +2,26 @@
 # This file is a part of XSiteGen project.
 # See LICENSE for copyright and licensing details.
 
+import os, sys, datetime, shutil
+
 VERSION = '1.4-develop'
 DEFAULT_ENCODING = 'UTF-8'
 
-import os, sys, datetime, shutil
+directories = {}
+template_files = {}
+file_encoding = DEFAULT_ENCODING
+source_file_extension = 'md'
+use_tab_indent = False
+indent_size = 8
+overwrite_pages = False
+copy_files = True
+overwrite_files = False
+file_copy_blacklist = []
+datetime_zone = datetime.timezone.utc
+datetime_format = '%Y-%m-%d %H:%M:%S UTC'
+global_variables = {}
+directory_variables = {}
+markdown_extensions = [ 'md_in_html', 'nl2br' ]
 
 def die(message, code=0):
     print(message)
