@@ -14,7 +14,7 @@ import os
 import sys
 
 def version():
-    die(f'XSiteGen {VERSION}\nCopyright (с) 2025 Ivan Movchan\nhttps://github.com/ivan-movchan/xsitegen')
+    die(f'XSiteGen {VERSION}\nCopyright (с) 2025-2026 Ivan Movchan\nhttps://github.com/ivan-movchan/xsitegen')
 
 def usage():
     die(f'Usage: xsitegen [-hv]')
