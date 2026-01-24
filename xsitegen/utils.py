@@ -10,7 +10,7 @@ DEFAULT_ENCODING = 'UTF-8'
 
 def die(message, code=0):
     print(message)
-    exit(code)
+    sys.exit(code)
 
 def read_file(file_name, encoding=DEFAULT_ENCODING):
     content = None
