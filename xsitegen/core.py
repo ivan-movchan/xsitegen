@@ -21,10 +21,7 @@ try:
     
     print(f'Using configuration module "{config.__file__}".')
 except Exception as e:
-    if e == ModuleNotFoundError:
-        die('The configuration module ("config.py") was not found.\nPlease create it from the template, or run XSiteGen in another directory\nwhere the module exists.', 1)
-    else:
-        die(f'The configuration module ("config.py") has an error:\n{e}', 1)
+    die(f'An error occurred while loading the configuration module:\n{e}', 1)
 
 PAGE_VARIABLE_BLOCK_BEGIN = PAGE_VARIABLE_BLOCK_END = '---'
 
