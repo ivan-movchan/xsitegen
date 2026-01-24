@@ -17,3 +17,5 @@ directory_variables = {
         'menu': '<a href="../index.html">Home</a> &bull; About me'
     }
 }
+
+variable_priority_list = [ 'global', 'directory', 'page' ]

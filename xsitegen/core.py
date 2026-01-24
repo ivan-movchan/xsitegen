@@ -83,13 +83,23 @@ def replace_variables(text, variables):
 def generate_page(source_file_name, template_text, target_file_name):
     source_text = read_file(source_file_name, file_encoding)
     
+    variables = { }
     page_variables = get_page_variables(source_text)
     my_directory_variables = get_directory_variables(source_file_name)
     
     if page_variables == None:
         return False
-    
-    variables = {**page_variables, **my_directory_variables, **global_variables}
+    else:
+        if len(variable_priority_list) > 0:
+            for item in variable_priority_list:
+                if item == 'page':
+                    variables = { **variables, **page_variables }
+                elif item == 'directory':
+                    variables = { **variables, **my_directory_variables }
+                elif item == 'global':
+                    variables = { **variables, **global_variables }
+        else:
+            variables = { **page_variables, **my_directory_variables, **global_variables }
     
     page_content_raw = '\n'.join(source_text.splitlines()[(len(page_variables) + 2):])
     
