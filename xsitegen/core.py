@@ -104,15 +104,14 @@ def generate_page(source_file_name, template_text, target_file_name):
     page_content_raw = '\n'.join(source_text.splitlines()[(len(page_variables) + 2):])
     
     try:
-        page_content_raw = markdown(page_content, output_format='html', extensions=markdown_extensions)
+        page_content_raw = markdown(page_content_raw, output_format='html', extensions=markdown_extensions)
     except:
         pass
     
     page_content = ''
     
-    for line in page_content.splitlines():
-        new_line = (('\t' * indent_size) if use_tab_indent else (' ' * indent_size)) + page_content_lines[i]
-        page_content.append(new_line)
+    for line in page_content_raw.splitlines():
+        page_content += (('\t' * indent_size) if use_tab_indent else (' ' * indent_size)) + line
     
     page_text = template_text.replace('{content}', page_content)
     
