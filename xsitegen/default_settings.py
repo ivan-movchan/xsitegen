@@ -4,8 +4,8 @@
 
 import datetime
 
-directories = {}
-template_files = {}
+directories = { }
+template_files = { }
 file_encoding = 'UTF-8'
 source_file_extension = 'md'
 use_tab_indent = False
@@ -13,9 +13,10 @@ indent_size = 8
 overwrite_pages = False
 copy_files = True
 overwrite_files = False
-file_copy_blacklist = []
+file_copy_blacklist = [ ]
 datetime_zone = datetime.timezone.utc
 datetime_format = '%Y-%m-%d %H:%M:%S UTC'
-global_variables = {}
-directory_variables = {}
+global_variables = { }
+directory_variables = { }
+variable_priority_list = [ 'global', 'directory', 'page' ]
 markdown_extensions = [ 'md_in_html', 'nl2br' ]

@@ -10,10 +10,10 @@ global_variables = {
 }
 
 directory_variables = {
-    './demo/src/files/blog': {
+    './src/files/blog': {
         'menu': '<a href="../index.html">Home</a> &bull; <a href="../me/index.html">About me</a>'
     },
-    './demo/src/files/me': {
+    './src/files/me': {
         'menu': '<a href="../index.html">Home</a> &bull; About me'
     }
 }
