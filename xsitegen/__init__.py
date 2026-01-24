@@ -3,7 +3,7 @@
 # See LICENSE for copyright and licensing details.
 
 VERSION = '1.4-develop'
-PYTHON_VERSION_MINOR_REQUIRED = 9
+PYTHON_VERSION_MINOR_REQUIRED = 10
 
 from xsitegen.utils import die
 
