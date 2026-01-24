@@ -149,17 +149,17 @@ def main():
             target_file_name = f'{target_directory}/{source_file}'.replace('/./', '/')
             
             is_page = source_file.endswith(f'.{source_file_extension}')
-            
-            overwriting = os.path.isfile(target_file_name)
+            target_file_name = target_file_name.replace(f'.{source_file_extension}', '.html') if is_page else target_file_name
+            file_exists = os.path.isfile(target_file_name)
+            writing = True
             
             if is_page:
-                target_file_name = target_file_name.replace(f'.{source_file_extension}', '.html')
-                overwriting = overwriting and (is_page and not overwrite_pages)
+                writing = (not file_exists) or (overwrite_pages)
             else:
-                overwriting = overwriting and (not overwrite_files or source_file_name in file_copy_blacklist)
+                writing = (copy_files) and ((not source_file_name in file_copy_blacklist) and (file_exists and overwrite_files))
             
-            if not overwriting:
-                print(f'Not overwriting file "{target_file_name}".')
+            if not writing:
+                print(f'Not writing file "{target_file_name}".')
                 continue
             
             if is_page or (not is_page and copy_files):
