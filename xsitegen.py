@@ -8,21 +8,23 @@ PYTHON_VERSION_MINOR_REQUIRED = 10
 import os
 import sys
 
-from xsitegen.utils import die
+from xsitegen.utils import is_verbose, die
 
 def version():
     die(f'XSiteGen {VERSION}\nCopyright (с) 2025-2026 Ivan Movchan\nhttps://github.com/ivan-movchan/xsitegen')
 
 def usage():
-    die(f'Usage: xsitegen [-hv]')
+    die(f'Usage: xsitegen [-hvV]')
 
 def check_arguments():
     if len(sys.argv) > 1:
         for arg in sys.argv[1:]:
-            if arg == '-v':
-                version()
-            elif arg == '-h':
+            if arg == '-h':
                 usage()
+            elif arg == '-v':
+                print(f'This is XSiteGen {VERSION}, running in verbose mode.')
+            elif arg == '-V':
+                version()
             else:
                 print(f'Unknown argument: {arg}.')
                 usage()
@@ -31,7 +33,8 @@ def check_python_version():
     if sys.version_info.minor < PYTHON_VERSION_MINOR_REQUIRED:
         die(f'Python 3.{PYTHON_VERSION_MINOR_REQUIRED} or newer is required.', 3)
     else:
-        print(f'Powered by Python {'.'.join(map(str, sys.version_info))}.')
+        if is_verbose():
+            print(f'Powered by Python {'.'.join(map(str, sys.version_info))}.')
 
 if __name__ != '__main__':
     die('This module was incorrectly imported. Terminating.', 42)

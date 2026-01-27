@@ -6,9 +6,13 @@ import datetime
 from xsitegen.utils import *
 from xsitegen.default_settings import *
 
+verbose = is_verbose()
+
 try:
     from markdown import markdown, __version_info__
-    print(f'Powered by Python-Markdown {'.'.join(map(str, __version_info__))}.')
+    
+    if verbose:
+        print(f'Powered by Python-Markdown {'.'.join(map(str, __version_info__))}.')
 except:
     print('Failed to import Python-Markdown. Markdown support is not available.')
 
@@ -19,7 +23,8 @@ try:
     import config
     from config import *
     
-    print(f'Using configuration module "{config.__file__}".')
+    if verbose:
+        print(f'Using configuration module "{config.__file__}".')
 except Exception as e:
     die(f'An error occurred while loading the configuration module:\n{e}', 1)
 
@@ -120,7 +125,8 @@ def generate_page(source_file_name, template_text, target_file_name):
     return write_file(target_file_name, page_text, file_encoding)
 
 def main():
-    start_time = datetime.datetime.now()
+    if verbose:
+        start_time = datetime.datetime.now()
     
     for source_directory in directories:
         if not os.path.exists(source_directory):
@@ -131,7 +137,8 @@ def main():
             print(f'"{source_directory}" is not a directory. Ignoring.')
             continue
         
-        print(f'Working with directory "{source_directory}".')
+        if verbose:
+            print(f'Working with directory "{source_directory}".')
         
         template_file_name = template_files[source_directory]
         template_text = read_file(template_file_name, file_encoding)
@@ -145,10 +152,11 @@ def main():
             continue
         
         target_directory = directories[source_directory]
-        print(f'Target directory is "{target_directory}".')
-        
         source_files = scan_directory(source_directory)
-        print(f'{len(source_files)} file(s) detected.')
+        
+        if verbose:
+            print(f'Target directory is "{target_directory}".')
+            print(f'{len(source_files)} file(s) detected.')
         
         for source_file in source_files:
             source_file_name = f'{source_directory}/{source_file}'.replace('/./', '/')
@@ -165,7 +173,8 @@ def main():
                 writing = (copy_files) and ((not source_file_name in file_copy_blacklist) and (file_exists and overwrite_files))
             
             if not writing:
-                print(f'Not writing file "{target_file_name}".')
+                if verbose:
+                    print(f'Not writing file "{target_file_name}".')
                 continue
             
             if is_page or (not is_page and copy_files):
@@ -176,11 +185,12 @@ def main():
             is_written = generate_page(source_file_name, template_text, target_file_name) if is_page else copy_file(source_file_name, target_file_name)
             
             if is_written:
-                print(f'Written file "{target_file_name}".')
+                if verbose:
+                    print(f'Written file "{target_file_name}".')
             else:
                 print(f'Failed to write file "{target_file_name}".')
     
-    end_time = datetime.datetime.now()
-    work_time = (end_time - start_time)
-    
-    print(f'Finished in {work_time}.')
+    if verbose:
+        end_time = datetime.datetime.now()
+        work_time = (end_time - start_time)
+        print(f'Finished in {work_time}.')

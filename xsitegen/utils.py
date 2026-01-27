@@ -57,3 +57,6 @@ def copy_file(source_file_name, target_file_name):
         return True
     except:
         return False
+
+def is_verbose():
+    return ('-v' in sys.argv)
