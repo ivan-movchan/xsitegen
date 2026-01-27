@@ -170,7 +170,7 @@ def main():
             if is_page:
                 writing = (not file_exists) or (overwrite_pages)
             else:
-                writing = (copy_files) and ((not source_file_name in file_copy_blacklist) and (file_exists and overwrite_files))
+                writing = copy_files and (not source_file_name in file_copy_blacklist) and (overwrite_files if file_exists else True)
             
             if not writing:
                 if verbose:
