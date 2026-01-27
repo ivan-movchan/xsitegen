@@ -11,10 +11,24 @@ import sys
 from xsitegen.utils import is_verbose, die
 
 def version():
-    die(f'XSiteGen {VERSION}\nCopyright (с) 2025-2026 Ivan Movchan\nhttps://github.com/ivan-movchan/xsitegen')
+    die(f'''XSiteGen {VERSION}
+Copyright (с) 2025-2026 Ivan Movchan
+https://github.com/ivan-movchan/xsitegen
+
+This is free software released under the terms of the MIT license.
+See the LICENSE file for further details.''')
 
 def usage():
-    die(f'Usage: xsitegen [-hvV]')
+    die('''Usage: xsitegen [-hvV]
+
+Commands:
+-h:    Show this help message
+-V:    Show program version and exit
+
+Options:
+-v:    Verbose mode
+
+See the documentation for further details.''')
 
 def check_arguments():
     if len(sys.argv) > 1:
