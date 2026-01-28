@@ -2,7 +2,7 @@
 # This file is a part of XSiteGen project.
 # See LICENSE for copyright and licensing details.
 
-VERSION = '1.4-develop'
+VERSION = '2.0-develop'
 PYTHON_VERSION_MINOR_REQUIRED = 10
 
 import os
