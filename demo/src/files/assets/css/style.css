@@ -1,0 +1,32 @@
+body {
+    font-family: system-ui, sans-serif;
+    font-size: 1.25em;
+    margin: 0px auto;
+    padding: 16px 32px 48px 32px;
+    max-width: 1024px;
+}
+
+a {
+    color: #ff8000;
+    text-decoration: none;
+    border-bottom: 1px dotted #ff8000;
+}
+
+a:hover {
+    border-bottom: 1px solid #ff8000;
+}
+
+pre, code {
+    background-color: #f0f0f0;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #222222;
+        color: #ffffff;
+    }
+    
+    pre, code {
+        background-color: #444444;
+    }
+}
