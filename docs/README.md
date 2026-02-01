@@ -178,7 +178,7 @@ The source files' tree of the site being built with XSiteGen can look like this:
 
 ### Demo
 
-The [demo](demo/) directory contains source files of an example site that can be used as a template for your future sites being built with XSiteGen.
+The [demo](../demo/) directory contains source files of an example site that can be used as a template for your future sites being built with XSiteGen.
 
 ## History
 
