@@ -7,7 +7,7 @@
 
 </div>
 
-### XSiteGen 2.0 — in development...
+### XSiteGen 2.0 — 2026-02-01
 
 - **Added:**   directory and page variables.
 - **Added:**   variable priority list.
