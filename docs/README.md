@@ -23,7 +23,7 @@ The "X" letter in project name stands for "experimental", since the project was 
     - [Dependencies](#dependencies)
     - [Cloning the repository](#cloning-the-repository)
     - [GitHub Releases](#github-releases)
-- [Usage]
+- [Usage](#usage)
     - [Command line](#command-line)
     - [Configuration](#configuration)
     - [Variables](#variables)
