@@ -111,9 +111,11 @@ def generate_page(source_file_name, template_text, target_file_name):
         pass
     
     page_content = ''
+    page_content_raw_lines = page_content_raw.splitlines()
     
-    for line in page_content_raw.splitlines():
-        page_content += (('\t' * indent_size) if use_tab_indent else (' ' * indent_size)) + line
+    for i in range(len(page_content_raw_lines)):
+        page_content += '\n' if i > 0 else ''
+        page_content += (('\t' * abs(indent_size)) if use_tab_indent else (' ' * abs(indent_size))) + page_content_raw_lines[i]
     
     page_text = template_text.replace('{content}', page_content)
     
