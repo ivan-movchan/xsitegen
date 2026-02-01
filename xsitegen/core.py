@@ -78,7 +78,7 @@ def replace_variables(text, variables):
     result = text
     
     for variable in variables:
-        result = result.replace(f'{{{variable}}}', variables[variable])
+        result = result.replace(f'{{{variable}}}', str(variables[variable]))
     
     return result
 
