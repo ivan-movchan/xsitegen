@@ -2,7 +2,7 @@
 
 <img src="../images/logo.png" style="width: 128px;">
 
-# XSiteGen 2.0-develop
+# XSiteGen 2.0
 #### *English &bull; [Русский](README-RU.md)*
 
 </div>
@@ -89,7 +89,7 @@ On finishing XSiteGen is able to return one of these exit codes:
 - `3`: Running Python version is lower than required (see "Installation").
 - `42`: XSiteGen was not executed directly but instead imported by other module.
 
-> [!INFO]
+> [!TIP]
 >
 > You may want to add XSiteGen location to `PATH` environment variable to be able to run XSiteGen from anywhere by simply typing `xsitegen` (or `xsitegen.py`) into console.
 
