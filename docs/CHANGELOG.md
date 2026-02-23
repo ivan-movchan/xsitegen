@@ -7,6 +7,10 @@
 
 </div>
 
+### XSiteGen 2.01 — 2026-02-23
+
+- **Fixed:** wrong `c` symbol in copyright symbol (typo).
+
 ### XSiteGen 2.0 — 2026-02-01
 
 - **Added:**   directory and page variables.

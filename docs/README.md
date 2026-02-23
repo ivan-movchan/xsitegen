@@ -2,7 +2,7 @@
 
 <img src="../images/logo.png" style="width: 128px;">
 
-# XSiteGen 2.0
+# XSiteGen 2.01
 #### *English &bull; [Русский](README-RU.md)*
 
 </div>
