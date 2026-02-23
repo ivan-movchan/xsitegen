@@ -2,7 +2,7 @@
 # This file is a part of XSiteGen project.
 # See LICENSE for copyright and licensing details.
 
-VERSION = '2.0-develop'
+VERSION = '2.01-develop'
 PYTHON_VERSION_MINOR_REQUIRED = 10
 
 import os
@@ -12,7 +12,7 @@ from xsitegen.utils import is_verbose, die
 
 def version():
     die(f'''XSiteGen {VERSION}
-Copyright (с) 2025-2026 Ivan Movchan
+Copyright (c) 2025-2026 Ivan Movchan
 https://github.com/ivan-movchan/xsitegen
 
 This is free software released under the terms of the MIT license.
